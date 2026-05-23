@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sathiya Priyan — Data Analyst</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:       #181c20;
+      --surface:  #1f2329;
+      --card:     #262c34;
+      --border:   #353d47;
+      --accent:   #f0c060;
+      --accent2:  #60c8e8;
+      --text:     #eef0f3;
+      --muted:    #9aa3ae;
+      --serif:    'DM Serif Display', serif;
+      --sans:     'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ─────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      padding: 1.2rem 0;
+      background: rgba(13,13,13,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); text-shadow: 0 0 12px rgba(240,192,96,0.4); }
+
+    /* ── HERO ────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.25;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(232,201,126,0.08) 0%, transparent 70%);
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .hero-content {
+      max-width: 1100px; margin: 0 auto; width: 100%;
+      position: relative; z-index: 2;
+    }
+    .hero-tag {
+      display: inline-block;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 1.05;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+    .hero-name em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-desc {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+    .hero-pills {
+      display: flex; flex-wrap: wrap; gap: 0.6rem;
+      margin-bottom: 2.5rem;
+    }
+    .pill {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--accent2);
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      letter-spacing: 0.05em;
+    }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary-custom {
+      background: var(--accent);
+      color: #0d0d0d;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-primary-custom:hover { opacity: 0.85; transform: translateY(-1px); color: #0d0d0d; }
+    .btn-outline-custom {
+      background: transparent;
+      color: var(--text);
+      font-weight: 500;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      padding: 0.8rem 2rem;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-outline-custom:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── SECTIONS ────────────────────────────────── */
+    section { padding: 5rem 2rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .section-sub {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 540px;
+      margin-bottom: 3rem;
+    }
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* ── ABOUT ───────────────────────────────────── */
+    #about { background: var(--surface); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-text p { color: var(--muted); margin-bottom: 1.2rem; font-size: 0.95rem; }
+    .about-text p strong { color: var(--text); font-weight: 500; }
+    .stat-row {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1rem; margin-top: 2rem;
+    }
+    .stat-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 1.2rem;
+      border-radius: 4px;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      color: var(--accent);
+      display: block;
+    }
+    .stat-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+    .timeline { list-style: none; padding: 0; }
+    .timeline li {
+      padding: 1rem 0 1rem 1.5rem;
+      border-left: 1px solid var(--border);
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline li::before {
+      content: '';
+      position: absolute;
+      left: -4px; top: 1.35rem;
+      width: 7px; height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+    .timeline-role { font-weight: 600; font-size: 0.9rem; color: var(--text); }
+    .timeline-co { font-size: 0.82rem; color: var(--accent2); margin: 0.1rem 0; }
+    .timeline-period { font-size: 0.75rem; color: var(--muted); }
+
+    /* ── SKILLS ──────────────────────────────────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2rem;
+    }
+    .skill-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.6rem;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .skill-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 0 18px rgba(240,192,96,0.12); }
+    .skill-icon {
+      width: 40px; height: 40px;
+      background: rgba(232,201,126,0.1);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .skill-card h5 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.8rem; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .skill-tag {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.72rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 100px;
+    }
+
+    /* ── PROJECTS ────────────────────────────────── */
+    #projects { background: var(--surface); }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s;
+      display: flex; flex-direction: column;
+    }
+    .project-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 8px 32px rgba(240,192,96,0.1); }
+    .project-header {
+      padding: 1.5rem 1.5rem 0;
+      display: flex; align-items: flex-start; justify-content: space-between;
+    }
+    .project-num {
+      font-family: var(--serif);
+      font-size: 2.5rem;
+      color: var(--border);
+      line-height: 1;
+      font-style: italic;
+    }
+    .project-link {
+      color: var(--muted);
+      font-size: 1rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .project-link:hover { color: var(--accent); }
+    .project-body { padding: 1rem 1.5rem 1.5rem; flex: 1; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.8rem; }
+    .project-tag {
+      background: rgba(232,201,126,0.1);
+      color: var(--accent);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.7rem;
+      border-radius: 2px;
+    }
+    .project-body h4 { font-family: var(--serif); font-size: 1.2rem; margin-bottom: 0.6rem; font-style: italic; }
+    .project-body p { color: var(--muted); font-size: 0.85rem; line-height: 1.7; margin-bottom: 1rem; }
+    .project-stats { display: flex; gap: 1.2rem; }
+    .pstat { font-size: 0.75rem; color: var(--muted); }
+    .pstat strong { color: var(--accent2); font-weight: 600; display: block; font-size: 0.9rem; }
+
+    /* ── CERTIFICATIONS ──────────────────────────── */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem;
+    }
+    .cert-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.4rem;
+      display: flex; gap: 1rem; align-items: flex-start;
+      transition: border-color 0.25s;
+    }
+    .cert-card:hover { border-color: var(--accent2); }
+    .cert-icon {
+      width: 38px; height: 38px; min-width: 38px;
+      background: rgba(126,204,232,0.1);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; color: var(--accent2);
+    }
+    .cert-card h5 { font-size: 0.88rem; font-weight: 600; margin-bottom: 0.2rem; }
+    .cert-card p { font-size: 0.78rem; color: var(--muted); margin: 0; }
+
+    /* ── CONTACT ─────────────────────────────────── */
+    #contact { background: var(--surface); }
+    .contact-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 4rem 3rem;
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .contact-box h3 {
+      font-family: var(--serif);
+      font-size: 2.4rem;
+      font-style: italic;
+      margin-bottom: 0.5rem;
+    }
+    .contact-box p { color: var(--muted); margin-bottom: 2rem; font-size: 0.95rem; line-height: 1.8; }
+    .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.8rem 1.8rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: border-color 0.25s, color 0.25s, background 0.25s, transform 0.2s;
+    }
+    .contact-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(232,201,126,0.08);
+      transform: translateY(-2px);
+    }
+
+    /* ── FOOTER ──────────────────────────────────── */
+    footer {
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── SCROLL REVEAL ───────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .stat-row { grid-template-columns: repeat(3,1fr); }
+      .nav-links { display: none; }
+      .hero-name { font-size: 2.8rem; }
+      .contact-box { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">Sathiyapriyan.</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#freelance">Freelance</a></li>
+      <li><a href="#certifications">Certs</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Open to opportunities</div>
+    <h1 class="hero-name">Sathiya<br/><em>Priyan</em></h1>
+    <p class="hero-desc">
+      Data Analyst transitioning from 2.7 years of UI Development.
+      I turn messy datasets into clean insights — using SQL, Python, Power BI, and Excel.
+    </p>
+    <div class="hero-pills">
+      <span class="pill">SQL</span>
+      <span class="pill">Python · Pandas</span>
+      <span class="pill">Power BI · DAX</span>
+      <span class="pill">Excel · Power Query</span>
+      <span class="pill">Data Visualization</span>
+    </div>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary-custom">
+        <i class="bi bi-bar-chart-line"></i> View Projects
+      </a>
+      <a href="#contact" class="btn-outline-custom">
+        <i class="bi bi-envelope"></i> Contact Me
+      </a>
+    </div>
+  </div>
+  <div class="hero-content">
+    <img src="images_6.png" alt="profile_images" class="img-fluid" width="450" height="450">
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label">About</div>
+    <h2 class="section-title">Analyst by choice,<br/>developer by background.</h2>
+
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          I spent <strong>2.7 years as a UI Developer</strong> at InfinityHub, building data-heavy dashboards
+          and working closely with structured data. Over time I realized the part I enjoyed most
+          wasn't the UI — it was the data behind it.
+        </p>
+        <p>
+          That led me to a deliberate career switch into Data Analytics. I enrolled in the
+          <strong>Entri Elevate AI-Driven Data Analytics</strong> program and systematically built
+          skills in SQL, Python (Pandas, Seaborn, Plotly), Power BI, and Excel.
+        </p>
+        <p>
+          I've also completed the <strong>Deloitte Forage internship</strong> (Tableau + Excel tasks)
+          and a HackerEarth summative assessment covering all four tools.
+          I'm currently targeting Data Analyst roles in <strong>Bangalore, Chennai, and Coimbatore.</strong>
+        </p>
+
+        <div class="stat-row">
+          <div class="stat-box">
+            <span class="stat-num">2.7</span>
+            <span class="stat-label">Years Dev Exp</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">3</span>
+            <span class="stat-label">DA Projects</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">4</span>
+            <span class="stat-label">Core Tools</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal" style="transition-delay:0.15s">
+        <ul class="timeline">
+          <li>
+            <div class="timeline-role">Aspiring Data Analyst</div>
+            <div class="timeline-co">Entri Elevate · Self-study</div>
+            <div class="timeline-period">2025 — Present</div>
+          </li>
+          <li>
+            <div class="timeline-role">UI Developer</div>
+            <div class="timeline-co">InfinityHub</div>
+            <div class="timeline-period">2022 — 2024 · 2.7 yrs</div>
+          </li>
+          <li>
+            <div class="timeline-role">Paginator</div>
+            <div class="timeline-co">Diacritech</div>
+            <div class="timeline-period">Prior experience</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label">Skills</div>
+    <h2 class="section-title">Tools I work with.</h2>
+    <p class="section-sub">Built through real projects, not just courses.</p>
+
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-icon"><i class="bi bi-database"></i></div>
+        <h5>SQL / MySQL</h5>
+        <div class="skill-tags">
+          <span class="skill-tag">JOINs</span>
+          <span class="skill-tag">Window Functions</span>
+          <span class="skill-tag">CTEs</span>
+          <span class="skill-tag">GROUP BY / HAVING</span>
+          <span class="skill-tag">Subqueries</span>
+          <span class="skill-tag">RANK / DENSE_RANK</span>
+        </div>
+      </div>
+      <div class="skill-card reveal" style="transition-delay:0.1s">
+        <div class="skill-icon"><i class="bi bi-filetype-py"></i></div>
+        <h5>Python · Pandas</h5>
+        <div class="skill-tags">
+          <span class="skill-tag">EDA</span>
+          <span class="skill-tag">Data Cleaning</span>
+          <span class="skill-tag">GroupBy / Merge</span>
+          <span class="skill-tag">Seaborn</span>
+          <span class="skill-tag">Plotly</span>
+          <span class="skill-tag">Numpy polyfit</span>
+        </div>
+      </div>
+      <div class="skill-card reveal" style="transition-delay:0.2s">
+        <div class="skill-icon"><i class="bi bi-bar-chart-steps"></i></div>
+        <h5>Power BI · DAX</h5>
+        <div class="skill-tags">
+          <span class="skill-tag">DAX Measures</span>
+          <span class="skill-tag">CALCULATE / ALL</span>
+          <span class="skill-tag">Star Schema</span>
+          <span class="skill-tag">Power Query</span>
+          <span class="skill-tag">KPI Cards</span>
+          <span class="skill-tag">Slicers</span>
+        </div>
+      </div>
+      <div class="skill-card reveal" style="transition-delay:0.3s">
+        <div class="skill-icon"><i class="bi bi-file-earmark-spreadsheet"></i></div>
+        <h5>Excel</h5>
+        <div class="skill-tags">
+          <span class="skill-tag">Pivot Tables</span>
+          <span class="skill-tag">VLOOKUP / INDEX-MATCH</span>
+          <span class="skill-tag">SUMIFS / COUNTIFS</span>
+          <span class="skill-tag">Power Query</span>
+          <span class="skill-tag">Dashboards</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-label">Projects</div>
+    <h2 class="section-title">Work that shows the thinking.</h2>
+    <p class="section-sub">End-to-end projects — from raw data to insight.</p>
+
+    <div class="projects-grid">
+
+      <div class="project-card reveal">
+        <div class="project-header">
+          <span class="project-num">01</span>
+          <a href="https://github.com/priyan5295/california-licensed-healthcare-facility-analysis" target="_blank" class="project-link">
+            <i class="bi bi-arrow-up-right"></i>
+          </a>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">Pandas</span>
+            <span class="project-tag">Plotly</span>
+          </div>
+          <h4>California Healthcare Facility Analysis</h4>
+          <p>
+            Cleaned and analyzed 10,921 records down to 3,294 usable rows.
+            Discovered LA County holds 72.1% of facilities, and 96.7% operate
+            with zero licensed beds — reframing how facility density is measured.
+            Built trend predictions for 2026–2027 using numpy polyfit.
+          </p>
+          <div class="project-stats">
+            <div class="pstat"><strong>10,921</strong> raw rows</div>
+            <div class="pstat"><strong>72.1%</strong> LA County share</div>
+            <div class="pstat"><strong>96.7%</strong> no-bed facilities</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" style="transition-delay:0.1s">
+        <div class="project-header">
+          <span class="project-num">02</span>
+          <a href="https://github.com/priyan5295/all-indian-retail-sales-performance" target="_blank" class="project-link">
+            <i class="bi bi-arrow-up-right"></i>
+          </a>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">Power BI</span>
+            <span class="project-tag">DAX</span>
+            <span class="project-tag">Power Query</span>
+          </div>
+          <h4>Indian Retail Sales Performance</h4>
+          <p>
+            Built an end-to-end interactive dashboard on a 1,220-row messy dataset.
+            Cleaned via Power Query, modeled as star schema, and wrote 9 DAX measures
+            including MoM growth and % of total. Delivered 6 KPI cards, 6 chart types,
+            and 3 dynamic slicers.
+          </p>
+          <div class="project-stats">
+            <div class="pstat"><strong>1,220</strong> rows</div>
+            <div class="pstat"><strong>9</strong> DAX measures</div>
+            <div class="pstat"><strong>6</strong> chart types</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" style="transition-delay:0.2s">
+        <div class="project-header">
+          <span class="project-num">03</span>
+          <a href="https://github.com/priyan5295/healthcare-ai-patient-insights-24-25" target="_blank" class="project-link">
+            <i class="bi bi-arrow-up-right"></i>
+          </a>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">Excel</span>
+            <span class="project-tag">Pivot Tables</span>
+            <span class="project-tag">Power Query</span>
+          </div>
+          <h4>Healthcare AI Patient Insights</h4>
+          <p>
+            Built an Excel dashboard analyzing healthcare AI patient data.
+            Used Pivot Tables, Power Query for data cleaning, and slicers
+            for interactive filtering. Surfaced key trends in patient insights
+            and service patterns.
+          </p>
+          <div class="project-stats">
+            <div class="pstat"><strong>Excel</strong> dashboard</div>
+            <div class="pstat"><strong>Pivot</strong> Tables</div>
+            <div class="pstat"><strong>Power</strong> Query</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" style="transition-delay:0.3s">
+        <div class="project-header">
+          <span class="project-num">04</span>
+          <a href="https://github.com/priyan5295/ai-job-market-analysis-25-30" target="_blank" class="project-link">
+            <i class="bi bi-arrow-up-right"></i>
+          </a>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">Power BI</span>
+            <span class="project-tag">DAX</span>
+            <span class="project-tag">Data Modeling</span>
+          </div>
+          <h4>AI Job Market Analysis 2025–30</h4>
+          <p>
+            Power BI dashboard analyzing AI job market trends from 2025 to 2030.
+            Applied DAX measures for YoY growth, built star schema model,
+            and visualized demand shifts across roles, regions, and skill sets.
+          </p>
+          <div class="project-stats">
+            <div class="pstat"><strong>Power BI</strong> report</div>
+            <div class="pstat"><strong>DAX</strong> measures</div>
+            <div class="pstat"><strong>Star</strong> schema</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" style="transition-delay:0.4s">
+        <div class="project-header">
+          <span class="project-num">05</span>
+          <a href="https://github.com/priyan5295/hr-attrition-sql-analysis" target="_blank" class="project-link">
+            <i class="bi bi-arrow-up-right"></i>
+          </a>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">SQL</span>
+            <span class="project-tag">MySQL</span>
+            <span class="project-tag">Window Functions</span>
+          </div>
+          <h4>HR Attrition SQL Analysis</h4>
+          <p>
+            End-to-end SQL analysis of HR attrition data using MySQL.
+            Applied JOINs, CTEs, window functions (RANK, DENSE_RANK, LAG/LEAD),
+            and subqueries to identify attrition patterns by department, tenure, and role.
+          </p>
+          <div class="project-stats">
+            <div class="pstat"><strong>SQL</strong> analysis</div>
+            <div class="pstat"><strong>CTEs</strong> + JOINs</div>
+            <div class="pstat"><strong>Window</strong> functions</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- FREELANCE UI -->
+<section id="freelance">
+  <div class="section-inner">
+    <div class="section-label">Freelance</div>
+    <h2 class="section-title">UI Development work.</h2>
+    <p class="section-sub">Client projects built and deployed — before the analytics pivot.</p>
+
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <div class="project-header">
+          <span class="project-num" style="font-size:1.8rem;color:var(--accent2);">UI</span>
+          <a href="https://blflegal.in/" target="_blank" class="project-link">
+            <i class="bi bi-arrow-up-right"></i>
+          </a>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag" style="background:rgba(96,200,232,0.1);color:var(--accent2);">HTML</span>
+            <span class="project-tag" style="background:rgba(96,200,232,0.1);color:var(--accent2);">CSS</span>
+            <span class="project-tag" style="background:rgba(96,200,232,0.1);color:var(--accent2);">Bootstrap</span>
+            <span class="project-tag" style="background:rgba(96,200,232,0.1);color:var(--accent2);">JS / jQuery</span>
+          </div>
+          <h4>BFL Legal — Law Firm Website</h4>
+          <p>
+            First freelance project: full website for a Tamil Nadu legal firm.
+            Started from a basic layout, iterated through client feedback rounds,
+            ensured mobile responsiveness, customized Bootstrap modals, and deployed
+            live on Hostinger. <strong style="color:var(--text)">Jan 2026.</strong>
+          </p>
+          <div class="project-stats">
+            <div class="pstat"><strong>Live</strong> deployment</div>
+            <div class="pstat"><strong>Mobile</strong> responsive</div>
+            <div class="pstat"><strong>Client</strong> reviewed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-inner">
+    <div class="section-label">Certifications</div>
+    <h2 class="section-title">Learning with proof.</h2>
+    <p class="section-sub">Programs and assessments that validated the transition.</p>
+
+    <div class="cert-grid">
+      <div class="cert-card reveal">
+        <div class="cert-icon"><i class="bi bi-building"></i></div>
+        <div>
+          <h5>Deloitte Technology Virtual Internship</h5>
+          <p>Forage · 2026 — Tableau Dashboard + Excel Data Analysis</p>
+        </div>
+      </div>
+      <div class="cert-card reveal" style="transition-delay:0.1s">
+        <div class="cert-icon"><i class="bi bi-cpu"></i></div>
+        <div>
+          <h5>AI-Driven Data Analytics Program</h5>
+          <p>Entri Elevate · 2025–2026 — SQL, Python, Power BI, Excel</p>
+        </div>
+      </div>
+      <div class="cert-card reveal" style="transition-delay:0.2s">
+        <div class="cert-icon"><i class="bi bi-patch-check"></i></div>
+        <div>
+          <h5>HackerEarth Summative Assessment</h5>
+          <p>April 2026 — SQL · Python · Excel · Power BI</p>
+        </div>
+      </div>
+      <div class="cert-card reveal" style="transition-delay:0.3s">
+        <div class="cert-icon"><i class="bi bi-code-slash"></i></div>
+        <div>
+          <h5>UI Development · 2.7 Years</h5>
+          <p>InfinityHub · HTML, CSS, JavaScript, React — Production projects</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-box reveal">
+      <h3>Let's work together.</h3>
+      <p>Open to Data Analyst, MIS Analyst, Reporting Analyst, and Business Analyst roles<br/>in Bangalore · Chennai · Coimbatore.</p>
+      <div class="contact-links">
+        <a href="mailto:your@email.com" class="contact-link">
+          <i class="bi bi-envelope"></i> Email Me
+        </a>
+        <a href="https://linkedin.com/in/sathiya-priyan-da" target="_blank" class="contact-link">
+          <i class="bi bi-linkedin"></i> LinkedIn
+        </a>
+        <a href="https://github.com/priyan5295" target="_blank" class="contact-link">
+          <i class="bi bi-github"></i> GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© <span id="footer-year"></span> Sathiya Priyan · Built by Sathiya Priyan.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Auto year in footer
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.getAttribute('id');
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--accent)' : '';
+    });
+  });
+</script>
+</body>
+</html>
